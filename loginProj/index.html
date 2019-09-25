@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=300, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+        <input type="text" id="email">
+        <input type="text" id="pwd">
+      <button id="btn1" onclick="btnClicked()">Log In</button>
+    </div>
+
+    <script>
+      function postAjax(url, data, success) {
+        var params = (typeof data) == "string"
+            ? data
+            : Object.keys(data)
+                .map(function(k) {
+                  return (
+                    encodeURIComponent(k) + "=" + encodeURIComponent(data[k])
+                  );
+                })
+                .join("&");
+
+        var xhr = window.XMLHttpRequest
+          ? new XMLHttpRequest()
+          : new ActiveXObject("Microsoft.XMLHTTP");
+        xhr.open("POST", url);
+        xhr.onreadystatechange = function() {            
+          if (xhr.readyState > 3) {
+            success(xhr.status, xhr.responseText);
+          }
+        };
+        //xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+          //"application/json"
+        );
+        xhr.send(params);
+        return xhr;
+      }
+
+      function btnClicked() {
+          var email = document.getElementById("email").value;
+          var pwd = document.getElementById("pwd").value;
+        postAjax('https://us-central1-mercdev-academy.cloudfunctions.net/login', 
+        { email: email, password: pwd }, 
+        function(status, data)
+        {
+            var json = JSON.parse(data); 
+            alert(data); 
+        });
+      }
+    </script>
+  </body>
+</html>
