@@ -3,11 +3,15 @@
 }
 
 .App-logo {
+  position: absolute;
+  top: 0%;
   height: 40vmin;
+  width: 20%;
 }
 
 .App-header {
   background-color: #282c34;
+  background-image: url('background.png');
   min-height: 100vh;
   display: flex;
   flex-direction: column;

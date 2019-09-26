@@ -1,0 +1,99 @@
+.LoginForm {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -200px;
+    margin-left: -300px;
+    height: 400px;
+    width: 600px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    background: #FFFFFF;
+    box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+.login_form__title{
+    font-family: Roboto;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+
+    margin-top: 48px;
+    margin-bottom: 10px;
+
+    text-align: center;
+    vertical-align: center;
+    letter-spacing: 0.2px;
+
+    color: #262626;
+
+    mix-blend-mode: normal;
+    opacity: 0.8;
+}
+
+.User-Image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-top: 10%;
+}
+
+.login_btn{
+    height: 48px;
+    width: 146px;
+
+    background: #ED4159;
+    box-shadow: 0px 4px 16px rgba(237, 65, 89, 0.4);
+    border-radius: 100px;
+
+    margin-top: 8px;
+
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+input {
+    background: #F1F1F1;
+    border-radius: 4px;
+    font-family: Roboto;
+    font-size: 24px;
+    border-color: transparent;
+    width: 85%;
+    height: 38px;
+    margin-top: 32px;
+}
+
+.error-text{
+    font-family: Roboto;
+
+    /* margin-top: 48px; */
+    /* margin-bottom: 48px; */
+    
+    padding: 6px 0;
+    
+    width: 85%;
+    margin-top: 20px;
+
+    text-align: center;
+    vertical-align: center;
+    letter-spacing: 0.2px;
+
+    background: rgba(237, 65, 89, 0.25);
+    border-radius: 4px;
+
+    mix-blend-mode: normal;
+    opacity: 0.8;
+
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #ED4159;
+}
