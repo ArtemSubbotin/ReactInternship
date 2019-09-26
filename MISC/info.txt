@@ -18,7 +18,9 @@ https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 NVM:
 download nvm windows installer:
 https://github.com/coreybutler/nvm-windows/releases
-instruction:
+full instruction:
 https://canonium.com/articles/managing-node-versions-with-windows-nvm
+to install npx run command:
+npm i -g npx
 
 
