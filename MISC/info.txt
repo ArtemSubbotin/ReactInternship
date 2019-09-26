@@ -13,3 +13,12 @@ https://www.youtube.com/watch?v=e_KLk92LLvU&list=PLvTBThJr861xh3fCMf91Ip5_r6TdR1
 
 flex containers:
 https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+
+NVM:
+download nvm windows installer:
+https://github.com/coreybutler/nvm-windows/releases
+instruction:
+https://canonium.com/articles/managing-node-versions-with-windows-nvm
+
+
