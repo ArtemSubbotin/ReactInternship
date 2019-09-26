@@ -23,4 +23,7 @@ https://canonium.com/articles/managing-node-versions-with-windows-nvm
 to install npx run command:
 npm i -g npx
 
+russian react documentation:
+https://ru.reactjs.org/docs/react-component.html
+
 
