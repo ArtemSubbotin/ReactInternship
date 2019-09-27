@@ -27,3 +27,8 @@ russian react documentation:
 https://ru.reactjs.org/docs/react-component.html
 
 
+fetch:
+https://developer.mozilla.org/ru/docs/Web/API/Fetch_API/Using_Fetch
+
+BEM:
+https://ru.bem.info/methodology/quick-start/

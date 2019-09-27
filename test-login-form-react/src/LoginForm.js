@@ -14,7 +14,6 @@ class LoginForm extends React.Component {
         this.postAjax = this.postAjax.bind(this);
         this.logIn = this.logIn.bind(this);
         this.logOut = this.logOut.bind(this);
-        this.handleOnReadyStateChange = this.handleOnReadyStateChange.bind(this);
     }
 
     render() {
@@ -27,7 +26,7 @@ class LoginForm extends React.Component {
     renderLogIn(){
         var errorTag = '';
         if (this.state.hasError){
-            errorTag = <p className="error-text">{this.errorMessage}</p>;
+            errorTag = <p className="error_text">{this.errorMessage}</p>;
         }
 
         return (
@@ -79,45 +78,29 @@ class LoginForm extends React.Component {
     }
     
     postAjax(url, data) {
-        var params =
-            typeof data == "string"
-                ? data
-                : Object.keys(data)
-                    .map(function (k) {
-                        return (
-                            encodeURIComponent(k) + "=" + encodeURIComponent(data[k])
-                        );
-                    })
-                    .join("&");
+        var thisHack = this; //is there any better way?        
+        let hasError = false;
 
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", url);
-        var thisHack = this; //is there any better way?
-        xhr.onreadystatechange = function () {
-            thisHack.handleOnReadyStateChange(xhr.readyState, xhr.status, xhr.responseText);
-        };
-        //xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        xhr.setRequestHeader(
-            "Content-Type",
-            "application/x-www-form-urlencoded"
-            //"application/json"
-        );
-        xhr.send(params);
-        return xhr;
-    }
-
-    handleOnReadyStateChange(readyState, status, responseText){
-        if (readyState > 3) {
-            if (status == 200)
-                this.handleSuccess(responseText);
+        fetch(url, {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+        .then(resp => {
+            hasError = !resp.ok; //not sure this is the best option
+            return resp.json();
+        })
+        .then(respJson => {
+            if (hasError)
+                thisHack.handleError(respJson);
             else
-                this.handleError(responseText);
-        }
+                thisHack.handleSuccess(respJson);
+        })
+        .catch(error => alert(error));
     }
 
-    handleSuccess(data) {
-        var json = JSON.parse(data);
-
+    handleSuccess(json) {
+        //var json = JSON.parse(data);
         this.photoUrl = json.photoUrl;
         this.userName = json.name;
 
@@ -127,9 +110,7 @@ class LoginForm extends React.Component {
 
     }
 
-    handleError(data) {
-        var json = JSON.parse(data);
-
+    handleError(json) {
         this.errorMessage = json.error;
 
         this.setState({ 
