@@ -6,11 +6,9 @@ import './App.css';
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+      <div>
+          <img src={logo} className="app-container__logo" alt="logo" />
           <LoginForm baseUrl="https://us-central1-mercdev-academy.cloudfunctions.net/login"/>
-        </header>
       </div>
     );
   }

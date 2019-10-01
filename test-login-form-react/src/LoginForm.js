@@ -25,20 +25,24 @@ class LoginForm extends React.Component {
 
     renderLogIn(){
         var errorTag = '';
+        var emailClassName = "login-form__email text-input";
+        var pwdClassName = "login-form__pwd text-input";
         if (this.state.hasError){
-            errorTag = <p className="error_text">{this.errorMessage}</p>;
+            errorTag = <p className="login-form__error">{this.errorMessage}</p>;
+            emailClassName+=" text-input--invalid";
+            pwdClassName+=" text-input--invalid";
         }
 
         return (
-            <div className="LoginForm">
-                <p className="login_form__title">Log In</p>
+            <div className="app-container__body login-form panel">
+                <h1 className="login-form__title">Log In</h1>
 
-                <input type="text" id="email" />
-                <input type="text" id="pwd" />
+                <input type="text" id="inputEmail" className={emailClassName} placeholder="E-Mail"/>
+                <input type="text" id="inputPwd" className={pwdClassName} placeholder="Password"/>
 
                 {errorTag}
 
-                <button id="btn1" className="login_btn" onClick={this.logIn}>
+                <button id="btnLogIn" className="login-form__submit button" onClick={this.logIn}>
                     Login
                 </button>
             </div>
@@ -47,12 +51,12 @@ class LoginForm extends React.Component {
 
     renderLogOut(){
         return (
-            <div className="LoginForm">
-                <img src={this.photoUrl} className="User-Image" alt="logo" />
+            <div className="app-container__body login-form panel">
+                <img src={this.photoUrl} className="login-form__user-image" alt="logo" />
 
-                <p className="login_form__title">{this.userName}</p>
+                <h1 className="login-form__title">{this.userName}</h1>
 
-                <button id="btn1" className="login_btn" onClick={this.logOut}>
+                <button id="btnLogOut" className="login-form__submit button" onClick={this.logOut}>
                     Logout
                 </button>
             </div>
@@ -60,8 +64,8 @@ class LoginForm extends React.Component {
     }
 
     logIn() {
-        var email = document.getElementById("email").value;
-        var pwd = document.getElementById("pwd").value;
+        var email = document.getElementById("inputEmail").value;
+        var pwd = document.getElementById("inputPwd").value;
 
         this.postAjax(
             this.props.baseUrl,
