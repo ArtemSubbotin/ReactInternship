@@ -81,30 +81,32 @@ class LoginForm extends React.Component {
         this.setState({isLoggedIn: false, hasError: false});
     }
     
-    postAjax(url, data) {
-        var thisHack = this; //is there any better way?        
-        let hasError = false;
+    async postAjax(url, data) {
+        var resp, json;
+        
+        try {
+            resp = await fetch(url, {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+        } catch (error) {
+            console.log("get data from server error: " + error.message);
+        }
 
-        fetch(url, {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        })
-        .then(resp => {
-            hasError = !resp.ok; //not sure this is the best option
-            return resp.json();
-        })
-        .then(respJson => {
-            if (hasError)
-                thisHack.handleError(respJson);
-            else
-                thisHack.handleSuccess(respJson);
-        })
-        .catch(error => alert(error));
+        try {
+            json = await resp.json();
+        } catch (error) {
+            console.log("json parse error: " + error.message);
+        }
+
+        if (resp.ok)
+            this.handleSuccess(json);
+        else
+            this.handleError(json);
     }
 
     handleSuccess(json) {
-        //var json = JSON.parse(data);
         this.photoUrl = json.photoUrl;
         this.userName = json.name;
 
