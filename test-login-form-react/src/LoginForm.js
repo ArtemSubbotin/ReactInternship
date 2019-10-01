@@ -78,12 +78,23 @@ class LoginForm extends React.Component {
     }
     
     async postAjax(url, data) {
-        const resp = await fetch(url, {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        })
-        const json = await resp.json();
+        var resp, json;
+        
+        try {
+            resp = await fetch(url, {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+        } catch (error) {
+            console.log("get data from server error: " + error.message);
+        }
+
+        try {
+            json = await resp.json();
+        } catch (error) {
+            console.log("json parse error: " + error.message);
+        }
 
         if (resp.ok)
             this.handleSuccess(json);
