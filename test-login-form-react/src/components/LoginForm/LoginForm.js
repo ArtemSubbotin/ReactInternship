@@ -1,5 +1,8 @@
 import React from 'react';
 import './LoginForm.css';
+import '../SubmitButton/SubmitButton';
+import SubmitButton from '../SubmitButton/SubmitButton';
+import InputBox from '../InputBox/InputBox';
 
 
 export default class LoginForm extends React.Component {
@@ -37,34 +40,35 @@ export default class LoginForm extends React.Component {
 
     renderLogIn(){
         var errorTag = '';
-        var emailClassName = "login-form__email text-input";
-        var pwdClassName = "login-form__pwd text-input";
         if (this.state.hasError){
             errorTag = <p className="login-form__error">{this.errorMessage}</p>;
-            emailClassName+=" text-input--invalid";
-            pwdClassName+=" text-input--invalid";
         }
 
         return (
             <div className="app-container__body login-form panel">
                 <h1 className="login-form__title">Log In</h1>
 
-                <input type="text" id="inputEmail" 
-                    value={this.state.email}
-                    className={emailClassName} 
-                    onChange={this.onEmailChange}
-                    placeholder="E-Mail"/>
-                <input type="text" id="inputPwd" 
-                    value={this.state.pwd}
-                    className={pwdClassName} 
-                    onChange={this.onPwdChange}
-                    placeholder="Password"/>
+                <div className="login-form__email-container"> 
+                    <InputBox 
+                        value={this.state.email} 
+                        onChange={this.onEmailChange} 
+                        placeholder="E-Mail" 
+                        hasError={this.state.hasError}/>
+                </div>
+                
+                <div className="login-form__pwd-container"> 
+                    <InputBox 
+                        value={this.state.pwd} 
+                        onChange={this.onPwdChange} 
+                        placeholder="Password" 
+                        hasError={this.state.hasError}/>
+                </div>
 
                 {errorTag}
 
-                <button id="btnLogIn" className="login-form__submit button" onClick={this.doLogIn}>
+                <SubmitButton onClick={this.doLogIn}>
                     Login
-                </button>
+                </SubmitButton>
             </div>
         );
     }
@@ -76,9 +80,9 @@ export default class LoginForm extends React.Component {
 
                 <h1 className="login-form__title">{this.userName}</h1>
 
-                <button id="btnLogOut" className="login-form__submit button" onClick={this.doLogOut}>
+                <SubmitButton onClick={this.doLogOut}>
                     Logout
-                </button>
+                </SubmitButton>
             </div>
         );
     }
