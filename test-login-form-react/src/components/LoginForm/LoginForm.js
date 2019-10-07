@@ -2,7 +2,7 @@ import React from 'react';
 import './LoginForm.css';
 
 
-class LoginForm extends React.Component {
+export default class LoginForm extends React.Component {
     constructor(props) {
         super(props);
 
@@ -144,5 +144,3 @@ class LoginForm extends React.Component {
         });
     }
 }
-
-export default LoginForm;
