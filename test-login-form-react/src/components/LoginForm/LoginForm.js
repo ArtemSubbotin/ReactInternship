@@ -4,48 +4,35 @@ import '../SubmitButton/SubmitButton';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import InputBox from '../InputBox/InputBox';
 
-
 export default class LoginForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { 
-            isLoggedIn: false, 
+        this.state = {
             hasError: false,
             email: '',
             pwd : '',
          };
 
         this.postAjax = this.postAjax.bind(this);
-        this.doLogIn = this.doLogIn.bind(this);
-        this.doLogOut = this.doLogOut.bind(this);
-        this.onEmailChange = this.onEmailChange.bind(this);
-        this.onPwdChange = this.onPwdChange.bind(this);
     }
 
-    render() {
-        if (this.state.isLoggedIn)
-            return this.renderLogOut();
-        else
-            return this.renderLogIn();
-    }
-
-    onEmailChange(event){
+    onEmailChange = (event) => {
         this.setState({email: event.target.value});
     }
 
-    onPwdChange(event){
+    onPwdChange = (event) => {
         this.setState({pwd: event.target.value});
     }
 
-    renderLogIn(){
+    render(){
         var errorTag = '';
         if (this.state.hasError){
-            errorTag = <p className="login-form__error">{this.errorMessage}</p>;
+            errorTag = (<p className="login-form__error">{this.errorMessage}</p>);
         }
 
         return (
-            <div className="app-container__body login-form panel">
+            <div className="login-form panel">
                 <h1 className="login-form__title">Log In</h1>
 
                 <div className="login-form__email-container"> 
@@ -73,21 +60,7 @@ export default class LoginForm extends React.Component {
         );
     }
 
-    renderLogOut(){
-        return (
-            <div className="app-container__body login-form panel">
-                <img src={this.photoUrl} className="login-form__user-image" alt="logo" />
-
-                <h1 className="login-form__title">{this.userName}</h1>
-
-                <SubmitButton onClick={this.doLogOut}>
-                    Logout
-                </SubmitButton>
-            </div>
-        );
-    }
-
-    doLogIn() {
+    doLogIn = () => {
         var email = this.state.email;
         var pwd = this.state.pwd;
 
@@ -95,14 +68,6 @@ export default class LoginForm extends React.Component {
             this.props.baseUrl,
             { email: email, password: pwd }
         );
-    }
-
-    doLogOut(){
-        this.photoUrl = '';
-        this.userName = '';
-        this.errorMessage = '';
-
-        this.setState({isLoggedIn: false, hasError: false, email: '', pwd: ''});
     }
     
     async postAjax(url, data) {
@@ -131,13 +96,13 @@ export default class LoginForm extends React.Component {
     }
 
     handleSuccess(json) {
-        this.photoUrl = json.photoUrl;
-        this.userName = json.name;
+        var photoUrl = json.photoUrl;
+        var userName = json.name;
+        this.props.onLogInSucceeded(userName, photoUrl);
 
         this.setState({ 
-            isLoggedIn: true
+            hasError: false,
         });
-
     }
 
     handleError(json) {

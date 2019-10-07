@@ -1,0 +1,20 @@
+.logout-form {
+    text-align: center;
+}
+
+.logout_form__title {
+    opacity: 0.8;
+    font-family: Gotham, sans-serif;
+    font-size: 20px;
+    line-height: 1.2;
+    margin-top: 24px;
+    text-align: center;
+    color: #262626;
+  }
+
+.logout-form__user-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-top: 10%;
+}
