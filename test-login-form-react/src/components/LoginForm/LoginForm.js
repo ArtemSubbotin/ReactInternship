@@ -27,7 +27,7 @@ export default class LoginForm extends React.Component {
     }
 
     render(){
-        var errorTag = '';
+        let errorTag = '';
         if (this.state.hasError){
             errorTag = (<p className="login-form__error">{this.state.errorMessage}</p>);
         }
@@ -69,10 +69,8 @@ export default class LoginForm extends React.Component {
     }
     
     async postAjax(url, data) {
-        var resp, json;
-        
         try {
-            resp = await fetch(url, {
+            var resp = await fetch(url, {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
@@ -82,7 +80,7 @@ export default class LoginForm extends React.Component {
         }
 
         try {
-            json = await resp.json();
+            var json = await resp.json();
         } catch (error) {
             console.log("json parse error: " + error.message);
         }

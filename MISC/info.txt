@@ -32,3 +32,10 @@ https://developer.mozilla.org/ru/docs/Web/API/Fetch_API/Using_Fetch
 
 BEM:
 https://ru.bem.info/methodology/quick-start/
+
+
+classnames:
+https://www.npmjs.com/package/classnames
+
+just in case:
+https://learn.javascript.ru/let-const
