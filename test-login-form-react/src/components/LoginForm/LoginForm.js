@@ -35,21 +35,19 @@ export default class LoginForm extends React.Component {
             <div className="login-form panel">
                 <h1 className="login-form__title">Log In</h1>
 
-                <div className="login-form__email-container"> 
-                    <InputBox 
-                        value={this.state.email} 
-                        onChange={this.onEmailChange} 
-                        placeholder="E-Mail" 
-                        hasError={this.state.hasError}/>
-                </div>
+                <InputBox 
+                    className="login-form__email-container"
+                    value={this.state.email} 
+                    onChange={this.onEmailChange} 
+                    placeholder="E-Mail" 
+                    hasError={this.state.hasError}/>
                 
-                <div className="login-form__pwd-container"> 
-                    <InputBox 
-                        value={this.state.pwd} 
-                        onChange={this.onPwdChange} 
-                        placeholder="Password" 
-                        hasError={this.state.hasError}/>
-                </div>
+                <InputBox 
+                    className="login-form__pwd-container"
+                    value={this.state.pwd} 
+                    onChange={this.onPwdChange} 
+                    placeholder="Password" 
+                    hasError={this.state.hasError}/>
 
                 {errorTag}
 
