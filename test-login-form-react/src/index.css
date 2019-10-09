@@ -51,13 +51,3 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
-.app-container {
-  overflow: hidden;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-bottom: 16px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
