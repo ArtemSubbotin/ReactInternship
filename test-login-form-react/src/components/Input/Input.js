@@ -1,11 +1,11 @@
 import React from 'react';
-import './InputBox.css';
+import './Input.css';
 import classNames from 'classnames/bind';
 
-export default function InputBox(props) {
+export default function Input(props) {
     return (
         <input type="text" 
-            className={classNames('text-input', { 'text-input--invalid' : props.hasError }, props.className)}
+            className={classNames('input', { 'input--invalid' : props.hasError }, props.className)}
             value={props.value}
             onChange={props.onChange}
             placeholder={props.placeholder}/>

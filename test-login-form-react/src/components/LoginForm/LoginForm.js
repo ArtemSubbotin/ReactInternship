@@ -1,8 +1,8 @@
 import React from 'react';
 import './LoginForm.css';
-import '../SubmitButton/SubmitButton';
-import SubmitButton from '../SubmitButton/SubmitButton';
-import InputBox from '../InputBox/InputBox';
+import '../Button/Button';
+import Button from '../Button/Button';
+import Input from '../Input/Input';
 
 export default class LoginForm extends React.Component {
     constructor(props) {
@@ -10,8 +10,9 @@ export default class LoginForm extends React.Component {
 
         this.state = {
             hasError: false,
+            errorMessage: '',
             email: '',
-            pwd : '',
+            password : '',
          };
 
         this.postAjax = this.postAjax.bind(this);
@@ -21,50 +22,49 @@ export default class LoginForm extends React.Component {
         this.setState({email: event.target.value});
     }
 
-    onPwdChange = (event) => {
-        this.setState({pwd: event.target.value});
+    onPasswordChange = (event) => {
+        this.setState({password: event.target.value});
     }
 
     render(){
         var errorTag = '';
         if (this.state.hasError){
-            errorTag = (<p className="login-form__error">{this.errorMessage}</p>);
+            errorTag = (<p className="login-form__error">{this.state.errorMessage}</p>);
         }
 
         return (
             <div className="login-form panel">
                 <h1 className="login-form__title">Log In</h1>
 
-                <InputBox 
-                    className="login-form__email-container"
+                <Input 
+                    className="login-form__input-email"
                     value={this.state.email} 
                     onChange={this.onEmailChange} 
                     placeholder="E-Mail" 
                     hasError={this.state.hasError}/>
                 
-                <InputBox 
-                    className="login-form__pwd-container"
-                    value={this.state.pwd} 
-                    onChange={this.onPwdChange} 
+                <Input 
+                    className="login-form__input-password"
+                    value={this.state.password} 
+                    onChange={this.onPasswordChange} 
                     placeholder="Password" 
                     hasError={this.state.hasError}/>
 
                 {errorTag}
 
-                <SubmitButton onClick={this.doLogIn}>
+                <Button onClick={this.doLogIn} className="login-form__button">
                     Login
-                </SubmitButton>
+                </Button>
             </div>
         );
     }
 
     doLogIn = () => {
-        var email = this.state.email;
-        var pwd = this.state.pwd;
+        const {email, password } = this.state;
 
         this.postAjax(
             this.props.baseUrl,
-            { email: email, password: pwd }
+            { email: email, password: password }
         );
     }
     
@@ -94,9 +94,8 @@ export default class LoginForm extends React.Component {
     }
 
     handleSuccess(json) {
-        var photoUrl = json.photoUrl;
-        var userName = json.name;
-        this.props.onLogInSucceeded(userName, photoUrl);
+        const {photoUrl, name} = json;
+        this.props.onLogInSucceeded(name, photoUrl);
 
         this.setState({ 
             hasError: false,
@@ -104,10 +103,9 @@ export default class LoginForm extends React.Component {
     }
 
     handleError(json) {
-        this.errorMessage = json.error;
-
         this.setState({ 
             hasError: true,
+            errorMessage: json.error,
         });
     }
 }

@@ -11,11 +11,11 @@
   color: #262626;
 }
 
-.login-form__email-container {
+.login-form__input-email {
     margin-top: 32px;
 }
   
-.login-form__pwd-container {
+.login-form__input-password {
     margin-top: 24px;
 }
 
@@ -37,16 +37,25 @@
     padding: 14px;
 }
 
+
+.login-form__button {
+  min-width: 145px;
+  margin-top: 40px;
+  margin-bottom: 12px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media screen and (min-width: 768px) {
     .login-form__title {
       font-size: 24px;
     }
   
-    .login-form__email-container {
+    .login-form__input-email {
       margin-top: 48px;
     }
   
-    .login-form__pwd-container {
+    .login-form__input-password {
       margin-top: 32px;
     }
   
@@ -55,4 +64,9 @@
       font-size: 14px;
       padding: 14px 16px;
     }
-  }
+
+    .login-form__button {
+      margin-top: 60px;
+      margin-bottom: 24px;
+    }
+}

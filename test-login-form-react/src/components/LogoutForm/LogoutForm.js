@@ -1,6 +1,6 @@
 import React from 'react';
 import './LogoutForm.css';
-import SubmitButton from '../SubmitButton/SubmitButton';
+import Button from '../Button/Button';
 
 export default function LogoutForm(props) {
     return (
@@ -9,9 +9,9 @@ export default function LogoutForm(props) {
 
             <h1 className="logout_form__title">{props.userName}</h1>
 
-            <SubmitButton onClick={props.onLogOutClick}>
+            <Button onClick={props.onLogOutClick} className="logout-form__button">
                 Logout
-            </SubmitButton>
+            </Button>
         </div>
     );
 };
