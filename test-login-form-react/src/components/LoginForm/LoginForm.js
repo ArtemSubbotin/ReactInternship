@@ -31,7 +31,7 @@ export default class LoginForm extends React.Component {
         }
 
         return (
-            <div className="login-form panel">
+            <div className="login-form">
                 <h1 className="login-form__title">Log In</h1>
 
                 <Input 
