@@ -14,8 +14,6 @@ export default class LoginForm extends React.Component {
             email: '',
             password : '',
          };
-
-        this.postAjax = this.postAjax.bind(this);
     }
 
     onEmailChange = (event) => {
@@ -68,7 +66,7 @@ export default class LoginForm extends React.Component {
         );
     }
     
-    async postAjax(url, data) {
+    postAjax = async (url, data) => {
         try {
             var resp = await fetch(url, {
                 method: 'POST',
