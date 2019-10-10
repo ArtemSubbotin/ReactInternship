@@ -25,11 +25,6 @@ export default class LoginForm extends React.Component {
     }
 
     render(){
-        let errorTag = '';
-        if (this.state.hasError){
-            errorTag = (<p className="login-form__error">{this.state.errorMessage}</p>);
-        }
-
         return (
             <div className="login-form">
                 <h1 className="login-form__title">Log In</h1>
@@ -48,7 +43,9 @@ export default class LoginForm extends React.Component {
                     placeholder="Password" 
                     hasError={this.state.hasError}/>
 
-                {errorTag}
+                {this.state.hasError && (
+                    <p className="login-form__error">{this.state.errorMessage}</p>
+                )}
 
                 <Button onClick={this.doLogIn} className="login-form__button">
                     Login
