@@ -1,0 +1,19 @@
+.post {
+  margin: 30px 0px;
+  width: 400px;
+  background-color: #d1d1d1;
+}
+
+.post__title {
+  color: #09d3ac;
+}
+
+.post__user-name {
+  font-weight: bold;
+}
+
+.post__user-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}

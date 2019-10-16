@@ -1,17 +1,20 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
+import SearchField from "../SearchField/SearchField";
+import Post from "../Post/Post";
 
-import {fetchPosts, fetchUsers, getRandomUserPic} from '../../api/api';
+import { fetchPosts, fetchUsers, getRandomUserPic } from "../../api/api";
 
 export default class App extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
       loaded: false,
-      posts: null,    
+      posts: null,
       users: null,
-    }
+      searchText: null
+    };
 
     this.fetchData();
   }
@@ -27,54 +30,55 @@ export default class App extends React.Component {
     let users = await fetchUsers();
 
     let userDict = {};
-    
-    await this.asyncForEach(users, async (user) => {
-      let pic = await getRandomUserPic();
-      userDict[user.id] = { name: user.name, pic: pic };       
-    })
 
-    this.setState(
-      {
-        loaded: true,
-        posts: posts,
-        users: userDict
-      });
-  }
+    await this.asyncForEach(users, async user => {
+      let pic = await getRandomUserPic();
+      userDict[user.id] = { name: user.name, pic: pic };
+    });
+
+    this.setState({
+      loaded: true,
+      posts: posts,
+      users: userDict
+    });
+  };
+
+  onSearchClick = searchText => {
+    this.setState({ searchText: searchText });
+  };
 
   render() {
     if (this.state.loaded)
       return (
         <div className="app">
-          <ul>
-            {this.state.posts.map((post) => 
-              (
-                <li className="app__item">
-                  <div>
-
-                    <img src={this.state.users[post.userId].pic} alt="logo" className="app__user-image"/>
-
-                    <div className="app__user-name">
-                      {this.state.users[post.userId].name}
-                    </div>
-
-                    <div className="app__title">
-                      {post.title}
-                    </div>
-                    <dic>
-                      {post.body}
-                    </dic>
-                  </div>
-                </li>
-              )
-            )}
-          </ul>
+          <div>
+            <SearchField onSearchClick={this.onSearchClick} />
+          </div>
+          <div>
+            <ul>
+              {this.state.posts
+                .filter(post => {
+                  return (
+                    !this.state.searchText ||
+                    post.body.includes(this.state.searchText) ||
+                    post.title.includes(this.state.searchText)
+                  );
+                })
+                .map(post => (
+                  <li>
+                    <Post
+                      userUrl={this.state.users[post.userId].pic}
+                      highlightText={this.state.searchText}
+                      userName={this.state.users[post.userId].name}
+                      title={post.title}
+                      body={post.body}
+                    />
+                  </li>
+                ))}
+            </ul>
+          </div>
         </div>
       );
-    else
-      return (
-        <div className="app">
-          loading...
-        </div>
-      );
+    else return <div className="app">loading...</div>;
   }
 }
