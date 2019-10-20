@@ -1,6 +1,12 @@
 import React from "react";
 import "./SearchField.css";
 
+function classNames(baseClassName, extraClassName) {
+  //it doesn't look like we need to add the package to use its functionality only in one simple place
+  if (extraClassName) return `${baseClassName} ${extraClassName}`;
+  else return baseClassName;
+}
+
 export default class SearchField extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +22,7 @@ export default class SearchField extends React.Component {
 
   render() {
     return (
-      <div className={`${this.props.className} search-field`}>
+      <div className={classNames("search-field", this.props.className)}>
         <input
           className="search-field__input"
           type="text"
