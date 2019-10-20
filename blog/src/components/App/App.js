@@ -5,15 +5,37 @@ import Post from "../Post/Post";
 
 import { fetchPosts, fetchUsers, getRandomUserPic } from "../../api/api";
 
+function randomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+function randomBool() {
+  return Math.random() >= 0.5;
+}
+
+function pad(val) {
+  return val < 10 ? `0${val}` : `${val}`;
+}
+
+function randomTime() {
+  return `${pad(randomInt(12))}:${pad(randomInt(60))} ${
+    randomBool() ? "AM" : "PM"
+  }`;
+}
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loaded: false,
+      postsLoaded: false,
+      usersLoaded: false,
+      picsLoaded: false,
       posts: null,
       users: null,
-      searchText: null
+      pics: null,
+      searchText: null,
+      cnt: 0
     };
 
     this.fetchData();
@@ -27,19 +49,31 @@ export default class App extends React.Component {
 
   fetchData = async () => {
     let posts = await fetchPosts();
-    let users = await fetchUsers();
+    this.setState({
+      postsLoaded: true,
+      posts: posts,
+      cnt: posts.length
+    });
 
-    let userDict = {};
-
-    await this.asyncForEach(users, async user => {
-      let pic = await getRandomUserPic();
-      userDict[user.id] = { name: user.name, pic: pic };
+    let users = {};
+    (await fetchUsers()).forEach(user => {
+      users[user.id] = { id: user.id, name: user.name };
     });
 
     this.setState({
-      loaded: true,
-      posts: posts,
-      users: userDict
+      usersLoaded: true,
+      users: users
+    });
+
+    let pics = {};
+    await this.asyncForEach(Object.values(users), async user => {
+      let pic = await getRandomUserPic();
+      pics[user.id] = pic;
+    });
+
+    this.setState({
+      pics: pics,
+      picsLoaded: true
     });
   };
 
@@ -48,9 +82,13 @@ export default class App extends React.Component {
   };
 
   render() {
-    if (this.state.loaded)
+    if (this.state.postsLoaded)
       return (
         <div className="app">
+          <div>
+            <h1>Messages</h1>
+            <div>{this.state.cnt}</div>
+          </div>
           <div>
             <SearchField onSearchClick={this.onSearchClick} />
           </div>
@@ -67,11 +105,21 @@ export default class App extends React.Component {
                 .map(post => (
                   <li>
                     <Post
-                      userUrl={this.state.users[post.userId].pic}
+                      userUrl={
+                        this.state.picsLoaded
+                          ? this.state.pics[post.userId]
+                          : "https://randomuser.me/api/portraits/lego/1.jpg"
+                      }
                       highlightText={this.state.searchText}
-                      userName={this.state.users[post.userId].name}
+                      userName={
+                        this.state.usersLoaded
+                          ? this.state.users[post.userId].name
+                          : ""
+                      }
                       title={post.title}
                       body={post.body}
+                      online={randomBool()}
+                      time={randomTime()}
                     />
                   </li>
                 ))}
