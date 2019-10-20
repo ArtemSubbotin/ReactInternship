@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f1f2fb;
 }
 
 code {
@@ -12,9 +13,11 @@ code {
     monospace;
 }
 
-/* @font-face {
-  font-family: "Gotham";
-  font-weight: 900;
-  src: url("./fonts/GothamPro-Black.woff2") format("woff2"),
-    url("./fonts/GothamPro-Black.woff2") format("woff");
-} */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+  font-family: Muli;
+}

@@ -57,7 +57,7 @@ export default class App extends React.Component {
 
     let users = {};
     (await fetchUsers()).forEach(user => {
-      users[user.id] = { id: user.id, name: user.name };
+      users[user.id] = { id: user.id, name: user.name, online: randomBool() };
     });
 
     this.setState({
@@ -98,8 +98,7 @@ export default class App extends React.Component {
             .filter(post => {
               return (
                 !this.state.searchText ||
-                post.body.includes(this.state.searchText) ||
-                post.title.includes(this.state.searchText)
+                post.body.includes(this.state.searchText)
               );
             })
             .map(post => (
@@ -116,7 +115,9 @@ export default class App extends React.Component {
                 }
                 title={post.title}
                 body={post.body}
-                online={randomBool()}
+                online={
+                  this.state.usersLoaded && this.state.users[post.userId].online
+                }
                 time={randomTime()}
               />
             ))}

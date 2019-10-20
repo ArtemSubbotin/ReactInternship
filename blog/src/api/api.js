@@ -14,6 +14,7 @@ async function request(host, path, config = {}) {
     else return null;
   } catch (error) {
     //console.log("get data from server error: " + error.message);
+    return null;
   }
 }
 
