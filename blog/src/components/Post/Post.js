@@ -1,15 +1,12 @@
 import React from "react";
 import "./Post.css";
+import Pic from "../Pic/Pic";
 
 export default class Post extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="post">
-        <img src={this.props.userUrl} alt="logo" className="post__user-image" />
+        <Pic userUrl={this.props.userUrl} />
 
         <div className="post__user-name">{this.props.userName}</div>
 

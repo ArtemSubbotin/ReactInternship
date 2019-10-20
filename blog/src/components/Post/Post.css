@@ -1,7 +1,10 @@
 .post {
   margin: 30px 0px;
-  width: 400px;
-  background-color: #d1d1d1;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px -14px rgba(75, 78, 128, 0.2);
+  background-color: #ffffff;
+  margin-top: 14px;
+  width: 100%;
 }
 
 .post__title {

@@ -1,3 +1,21 @@
 .app {
   text-align: center;
+  background-color: #f1f2fb;
+}
+
+.app__posts-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.app__header-container {
+  height: 122px;
+}
+
+@media screen and (min-width: 768px) {
+  .aapp__header-container {
+    height: 112px;
+  }
 }

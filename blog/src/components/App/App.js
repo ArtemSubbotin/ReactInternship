@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import SearchField from "../SearchField/SearchField";
 import Post from "../Post/Post";
+import Header from "../Header/Header";
 
 import { fetchPosts, fetchUsers, getRandomUserPic } from "../../api/api";
 
@@ -82,51 +82,46 @@ export default class App extends React.Component {
   };
 
   render() {
-    if (this.state.postsLoaded)
-      return (
-        <div className="app">
-          <div>
-            <h1>Messages</h1>
-            <div>{this.state.cnt}</div>
-          </div>
-          <div>
-            <SearchField onSearchClick={this.onSearchClick} />
-          </div>
-          <div>
-            <ul>
-              {this.state.posts
-                .filter(post => {
-                  return (
-                    !this.state.searchText ||
-                    post.body.includes(this.state.searchText) ||
-                    post.title.includes(this.state.searchText)
-                  );
-                })
-                .map(post => (
-                  <li>
-                    <Post
-                      userUrl={
-                        this.state.picsLoaded
-                          ? this.state.pics[post.userId]
-                          : "https://randomuser.me/api/portraits/lego/1.jpg"
-                      }
-                      highlightText={this.state.searchText}
-                      userName={
-                        this.state.usersLoaded
-                          ? this.state.users[post.userId].name
-                          : ""
-                      }
-                      title={post.title}
-                      body={post.body}
-                      online={randomBool()}
-                      time={randomTime()}
-                    />
-                  </li>
-                ))}
-            </ul>
-          </div>
+    if (!this.state.postsLoaded) return <div className="app">loading...</div>;
+
+    return (
+      <div className="app">
+        <div className="app__header-container">
+          <Header
+            onSearchClick={this.onSearchClick}
+            messagesCnt={this.state.cnt}
+          />
         </div>
-      );
-    else return <div className="app">loading...</div>;
+
+        <div className="app__posts-container">
+          {this.state.posts
+            .filter(post => {
+              return (
+                !this.state.searchText ||
+                post.body.includes(this.state.searchText) ||
+                post.title.includes(this.state.searchText)
+              );
+            })
+            .map(post => (
+              <Post
+                key={post.id}
+                userUrl={
+                  this.state.picsLoaded ? this.state.pics[post.userId] : null
+                }
+                highlightText={this.state.searchText}
+                userName={
+                  this.state.usersLoaded
+                    ? this.state.users[post.userId].name
+                    : null
+                }
+                title={post.title}
+                body={post.body}
+                online={randomBool()}
+                time={randomTime()}
+              />
+            ))}
+        </div>
+      </div>
+    );
   }
 }

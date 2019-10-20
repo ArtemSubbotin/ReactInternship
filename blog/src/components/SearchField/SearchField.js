@@ -16,10 +16,11 @@ export default class SearchField extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={`${this.props.className} search-field`}>
         <input
+          className="search-field__input"
           type="text"
-          value={this.state.searchText}
+          value={this.state.searchText || ""}
           onChange={this.onSearchTextChange}
           placeholder="Search"
         />
@@ -30,7 +31,7 @@ export default class SearchField extends React.Component {
             this.props.onSearchClick(this.state.searchText);
           }}
         >
-          Search
+          <i className="fa fa-search"></i>
         </button>
       </div>
     );
