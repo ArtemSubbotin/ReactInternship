@@ -35,6 +35,10 @@
   color: #9394a7;
 }
 
+.post__highlight {
+  color: #715dff;
+}
+
 .post__user-name {
   font-weight: bold;
   color: #141740;
