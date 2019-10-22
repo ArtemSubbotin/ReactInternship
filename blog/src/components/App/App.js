@@ -49,6 +49,9 @@ export default class App extends React.Component {
 
   fetchData = async () => {
     let posts = await fetchPosts();
+    posts.forEach(post => {
+      post.time = randomTime();
+    });
     this.setState({
       postsLoaded: true,
       posts: posts,
@@ -82,7 +85,12 @@ export default class App extends React.Component {
   };
 
   render() {
-    if (!this.state.postsLoaded) return <div className="app">loading...</div>;
+    if (!this.state.postsLoaded)
+      return (
+        <div className="app">
+          <div className="app__loader">loading...</div>
+        </div>
+      );
 
     return (
       <div className="app">
@@ -118,7 +126,7 @@ export default class App extends React.Component {
                 online={
                   this.state.usersLoaded && this.state.users[post.userId].online
                 }
-                time={randomTime()}
+                time={post.time}
               />
             ))}
         </div>

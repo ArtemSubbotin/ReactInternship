@@ -13,7 +13,7 @@ async function request(host, path, config = {}) {
     if (resp.ok) return json;
     else return null;
   } catch (error) {
-    //console.log("get data from server error: " + error.message);
+    console.log("get data from server error: " + error.message);
     return null;
   }
 }

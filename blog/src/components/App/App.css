@@ -6,6 +6,14 @@
   align-items: center;
 }
 
+.app__loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
 .app__header-container {
   height: 122px;
   padding-left: 16px;
