@@ -85,12 +85,18 @@ export default class App extends React.Component {
   };
 
   render() {
-    if (!this.state.postsLoaded)
+    if (!this.state.postsLoaded) {
       return (
         <div className="app">
           <div className="app__loader">loading...</div>
         </div>
       );
+    }
+
+    let filteredPosts = this.state.posts.filter(
+      post =>
+        !this.state.searchText || post.body.includes(this.state.searchText)
+    );
 
     return (
       <div className="app">
@@ -102,33 +108,26 @@ export default class App extends React.Component {
         </div>
 
         <div className="app__posts-container">
-          {this.state.posts
-            .filter(post => {
-              return (
-                !this.state.searchText ||
-                post.body.includes(this.state.searchText)
-              );
-            })
-            .map(post => (
-              <Post
-                key={post.id}
-                userUrl={
-                  this.state.picsLoaded ? this.state.pics[post.userId] : null
-                }
-                highlightText={this.state.searchText}
-                userName={
-                  this.state.usersLoaded
-                    ? this.state.users[post.userId].name
-                    : null
-                }
-                title={post.title}
-                body={post.body}
-                online={
-                  this.state.usersLoaded && this.state.users[post.userId].online
-                }
-                time={post.time}
-              />
-            ))}
+          {filteredPosts.map(post => (
+            <Post
+              key={post.id}
+              userUrl={
+                this.state.picsLoaded ? this.state.pics[post.userId] : null
+              }
+              highlightText={this.state.searchText}
+              userName={
+                this.state.usersLoaded
+                  ? this.state.users[post.userId].name
+                  : null
+              }
+              title={post.title}
+              body={post.body}
+              online={
+                this.state.usersLoaded && this.state.users[post.userId].online
+              }
+              time={post.time}
+            />
+          ))}
         </div>
       </div>
     );
