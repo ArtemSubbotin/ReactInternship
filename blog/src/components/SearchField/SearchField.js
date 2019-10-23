@@ -31,16 +31,14 @@ export default class SearchField extends React.Component {
         onSubmit={this.submitForm}
         className={classNames("search-field", this.props.className)}
       >
-        <label htmlFor="searchTextId">
-          <input
-            id="searchTextId"
-            className="search-field__input"
-            type="text"
-            value={this.state.searchText || ""}
-            onChange={this.onSearchTextChange}
-            placeholder="Search"
-          />
-        </label>
+        <input
+          id="searchTextId"
+          className="search-field__input"
+          type="text"
+          value={this.state.searchText || ""}
+          onChange={this.onSearchTextChange}
+          placeholder="Search"
+        />
 
         <button type="submit" className="search-field__button button">
           <i className="fa fa-search"></i>
