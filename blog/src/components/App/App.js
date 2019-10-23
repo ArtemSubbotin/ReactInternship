@@ -4,8 +4,6 @@ import Post from "../Post/Post";
 import Header from "../Header/Header";
 import { fetchData } from "./DataFetcher";
 
-import { fetchPosts, fetchUsers, getRandomUserPic } from "../../api/api";
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
