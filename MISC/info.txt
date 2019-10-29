@@ -39,3 +39,7 @@ https://www.npmjs.com/package/classnames
 
 just in case:
 https://learn.javascript.ru/let-const
+
+
+blog designs:
+https://app.zeplin.io/project/5d556ff14718c6523533939a/dashboard
