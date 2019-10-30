@@ -5,18 +5,18 @@ import Highlighter from "react-highlight-words";
 
 export default class Post extends React.Component {
   render() {
-    const { userUrl, online, userName, time, highlightText, body } = this.props;
+    const { post, highlightText } = this.props;
 
     return (
       <div className="post">
         <div className="post__pic">
-          <Pic userUrl={userUrl} online={online} />
+          <Pic userUrl={post.user.pic} online={post.user.online} />
         </div>
 
         <div className="post__container">
           <div className="post__first-line-container">
-            <div className="post__user-name">{userName}</div>
-            <div className="post__time">{time}</div>
+            <div className="post__user-name">{post.user.name}</div>
+            <div className="post__time">{post.time}</div>
           </div>
 
           <div className="post__body">
@@ -24,7 +24,7 @@ export default class Post extends React.Component {
               highlightClassName="post__highlight"
               searchWords={[highlightText]}
               autoEscape={true}
-              textToHighlight={body}
+              textToHighlight={post.body}
             />
           </div>
         </div>
